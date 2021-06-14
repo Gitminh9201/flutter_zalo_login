@@ -12,7 +12,7 @@ class ZaloLogin {
   }
 
   Future<ZaloLoginResult> logIn() async {
-    final Map<dynamic, dynamic> result = await channel.invokeMethod('logIn');
+    final Map<dynamic, dynamic>? result = await channel.invokeMethod('logIn');
 
     return ZaloLoginResult.fromJson(result ?? {});
   }
@@ -23,7 +23,7 @@ class ZaloLogin {
       await channel.invokeMethod('isAuthenticated') == 1;
 
   Future<ZaloProfileModel> getInfo() async {
-    final Map<dynamic, dynamic> result = await channel.invokeMethod('getInfo');
+    final Map<dynamic, dynamic>? result = await channel.invokeMethod('getInfo');
 
     return ZaloProfileModel.fromJson(result ?? {});
   }
@@ -35,10 +35,10 @@ ZaloLoginResult authorPostsFromJson(String str) =>
 String authorPostsToJson(ZaloLoginResult data) => json.encode(data.toJson());
 
 class ZaloLoginResult {
-  String oauthCode;
-  String errorMessage;
-  int errorCode;
-  String userId;
+  String? oauthCode;
+  String? errorMessage;
+  int? errorCode;
+  String? userId;
 
   ZaloLoginResult({
     this.oauthCode,
@@ -48,10 +48,10 @@ class ZaloLoginResult {
   });
 
   ZaloLoginResult copyWith({
-    String oauthCode,
-    String errorMessage,
-    int errorCode,
-    String userId,
+    String? oauthCode,
+    String? errorMessage,
+    int? errorCode,
+    String? userId,
   }) =>
       ZaloLoginResult(
         oauthCode: oauthCode ?? this.oauthCode,
@@ -84,11 +84,11 @@ String zaloProfileModelToJson(ZaloProfileModel data) =>
     json.encode(data.toJson());
 
 class ZaloProfileModel {
-  String birthday;
-  String gender;
-  String name;
-  String id;
-  Picture picture;
+  String? birthday;
+  String? gender;
+  String? name;
+  String? id;
+  Picture? picture;
 
   ZaloProfileModel({
     this.birthday,
@@ -99,11 +99,11 @@ class ZaloProfileModel {
   });
 
   ZaloProfileModel copyWith({
-    String birthday,
-    String gender,
-    String name,
-    String id,
-    Picture picture,
+    String? birthday,
+    String? gender,
+    String? name,
+    String? id,
+    Picture? picture,
   }) =>
       ZaloProfileModel(
         birthday: birthday ?? this.birthday,
@@ -128,19 +128,19 @@ class ZaloProfileModel {
         "gender": gender == null ? null : gender,
         "name": name == null ? null : name,
         "id": id == null ? null : id,
-        "picture": picture == null ? null : picture.toJson(),
+        "picture": picture == null ? null : picture!.toJson(),
       };
 }
 
 class Picture {
-  Data data;
+  Data? data;
 
   Picture({
     this.data,
   });
 
   Picture copyWith({
-    Data data,
+    Data? data,
   }) =>
       Picture(
         data: data ?? this.data,
@@ -151,19 +151,19 @@ class Picture {
       );
 
   Map<dynamic, dynamic> toJson() => {
-        "data": data == null ? null : data.toJson(),
+        "data": data == null ? null : data!.toJson(),
       };
 }
 
 class Data {
-  String url;
+  String? url;
 
   Data({
     this.url,
   });
 
   Data copyWith({
-    String url,
+    String? url,
   }) =>
       Data(
         url: url ?? this.url,

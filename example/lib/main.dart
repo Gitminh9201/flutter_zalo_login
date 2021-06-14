@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -24,13 +24,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ZaloLoginResult zaloLoginResult = ZaloLoginResult(
+  ZaloLoginResult? zaloLoginResult = ZaloLoginResult(
     errorCode: -1,
     errorMessage: "",
     oauthCode: "",
     userId: "",
   );
-  ZaloProfileModel zaloInfo = ZaloProfileModel(
+  ZaloProfileModel? zaloInfo = ZaloProfileModel(
     birthday: "",
     gender: "",
     id: "",
@@ -110,13 +110,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "oauthCode: " + zaloLoginResult.oauthCode.toString(),
+                          "oauthCode: " +
+                              zaloLoginResult!.oauthCode!.toString(),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
                         Text("errorCode: " +
-                            zaloLoginResult.errorCode.toString()),
-                        Text("userId: " + zaloLoginResult.userId),
+                            zaloLoginResult!.errorCode.toString()),
+                        Text("userId: " + zaloLoginResult!.userId!),
                       ],
                     ),
                   ),
@@ -167,19 +168,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        if (zaloInfo != null && zaloInfo.picture != null)
-                          Image.network(zaloInfo.picture.data.url),
+                        if (zaloInfo != null && zaloInfo!.picture != null)
+                          Image.network(zaloInfo!.picture!.data!.url!),
                         Text(
-                          "id: " + zaloInfo?.id,
+                          "id: " + (zaloInfo?.id ?? ""),
                         ),
                         Text(
-                          "name: " + zaloInfo?.name,
+                          "name: " + (zaloInfo?.name ?? ""),
                         ),
                         Text(
-                          "birthday: " + zaloInfo?.birthday,
+                          "birthday: " + (zaloInfo?.birthday ?? ""),
                         ),
                         Text(
-                          "gender: " + zaloInfo?.gender,
+                          "gender: " + (zaloInfo?.gender ?? ""),
                         ),
                       ],
                     ),
